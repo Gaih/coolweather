@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.gaih.coolweather.service.AutoUpdateService;
 import com.example.gaih.coolweather.util.HttpCallbackListener;
 import com.example.gaih.coolweather.util.HttpUtil;
 import com.example.gaih.coolweather.util.Utility;
@@ -96,7 +97,7 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
     }
 
     private void queryWeatherInfo(String weatherCode){
-        String address = "http://weatherapi.market.xiaomi.com/wtr-v2/temp/forecast?cityId="+weatherCode+"s";;
+        String address = "http://weatherapi.market.xiaomi.com/wtr-v2/temp/forecast?cityId="+weatherCode+"s";
         queryFromServer(address,"weatherCode");
     }
     private void queryFromServer(final String address, final String type) {
@@ -143,6 +144,8 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
         currentDateText.setText(prefs.getString("current_date",""));
         weatherInfoLayout.setVisibility(View.VISIBLE);
         cityNameText.setVisibility(View.VISIBLE);
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startActivity(intent);
     }
 
 }
